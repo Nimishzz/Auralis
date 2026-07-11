@@ -85,6 +85,12 @@ let webpackConfig = {
     },
     configure: (webpackConfig) => {
 
+      // Ensure .ts/.tsx are resolved in addition to CRA defaults
+      const currentExts = webpackConfig.resolve?.extensions || [];
+      const desiredExts = ['.tsx', '.ts', '.jsx', '.js', '.json'];
+      webpackConfig.resolve = webpackConfig.resolve || {};
+      webpackConfig.resolve.extensions = Array.from(new Set([...desiredExts, ...currentExts]));
+
       // Add ignored patterns to reduce watched directories
         webpackConfig.watchOptions = {
           ...webpackConfig.watchOptions,

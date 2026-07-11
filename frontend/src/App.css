@@ -13,6 +13,31 @@
 }
 
 /* --- Y2K / Frutiger Aero wallpaper --- */
+.wallpaper-image {
+  position: absolute; inset: 0;
+  overflow: hidden;
+  background: linear-gradient(180deg, #6cc6ff 0%, #3aa0f0 40%, #7fd0ff 70%, #b6e6ff 100%);
+}
+.wallpaper-image img {
+  position: absolute; inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  filter: saturate(1.25) contrast(1.05);
+}
+.wallpaper-tint {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(255,255,255,0.35), transparent 55%),
+    radial-gradient(ellipse at 20% 15%, rgba(255,255,255,0.2), transparent 55%);
+  pointer-events: none;
+}
+.wallpaper-tint.night {
+  background:
+    radial-gradient(ellipse at 50% 110%, rgba(80,120,200,0.35), transparent 55%),
+    linear-gradient(180deg, rgba(15,25,55,0.55), rgba(5,15,40,0.35));
+}
+
+/* Legacy CSS wallpaper (kept for reference / fallback) */
 .wallpaper {
   position: absolute; inset: 0;
   background:
@@ -57,83 +82,175 @@
     0 8px 24px rgba(0,50,120,0.25);
 }
 
-/* --- Taskbar --- */
+/* --- Taskbar (40px, glossy Luna blue with specular highlight) --- */
 .taskbar {
   position: absolute; left: 0; right: 0; bottom: 0;
-  height: 42px;
+  height: 40px;
   background:
     linear-gradient(180deg,
       #3f83e5 0%,
-      #245aad 6%,
+      #245aad 5%,
       #2b6bcf 14%,
       #1e56b3 55%,
       #1a4aa0 88%,
       #2f6bd0 100%);
-  border-top: 1px solid #82b5ff;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 -2px 8px rgba(0,0,0,0.3);
+  border-top: 1px solid #0f3a80;
+  box-shadow: 0 -2px 12px rgba(0,0,0,0.35);
   display: flex; align-items: center; gap: 6px;
-  padding: 0 6px;
+  padding: 0 6px 0 0;
   z-index: 100;
 }
+.taskbar-highlight {
+  position: absolute; top: 0; left: 0; right: 0; height: 1px;
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.85) 50%, rgba(255,255,255,0));
+  pointer-events: none;
+}
 
+/* Start button (green Luna pill) */
 .start-btn {
-  height: 32px; padding: 0 18px 0 14px;
+  height: 32px; padding: 0 20px 0 12px;
   display: flex; align-items: center; gap: 8px;
-  background: linear-gradient(180deg, #6cd66a 0%, #4bbf3f 45%, #2ea628 55%, #1c8a1a 100%);
+  background: linear-gradient(180deg, #a4ec7c 0%, #66c94a 30%, #3aa02b 60%, #1c7d18 100%);
   border: 1px solid #0d5a10;
-  border-radius: 4px 18px 18px 4px;
+  border-radius: 4px 20px 20px 4px;
   color: white;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   font-weight: 700;
   font-style: italic;
-  font-size: 14px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
+  font-size: 15px;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.55);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.5),
-    inset 0 -8px 12px rgba(0,60,0,0.3),
-    0 2px 4px rgba(0,0,0,0.3);
+    inset 0 1px 0 rgba(255,255,255,0.7),
+    inset 0 -12px 14px rgba(0,50,0,0.35),
+    inset 0 0 0 1px rgba(255,255,255,0.15),
+    0 2px 6px rgba(0,0,0,0.45);
   cursor: pointer;
   transition: filter 0.15s;
+  position: relative;
+  z-index: 2;
 }
-.start-btn:hover { filter: brightness(1.1); }
+.start-btn:hover { filter: brightness(1.08); }
 .start-btn:active { filter: brightness(0.9); }
+.start-orb {
+  display: inline-block;
+  width: 18px; height: 18px; border-radius: 50%;
+  box-shadow: inset 0 -2px 3px rgba(0,0,0,0.4), 0 0 8px rgba(255,180,60,0.7);
+  border: 1px solid rgba(255,255,255,0.6);
+}
+.start-text { line-height: 1; }
+
+/* Middle: task tabs area */
+.task-tabs {
+  flex: 1;
+  display: flex; align-items: center; gap: 4px;
+  overflow: hidden;
+  padding: 0 4px;
+}
 
 .taskbar-tab {
   height: 30px;
-  min-width: 140px; max-width: 220px;
-  padding: 0 10px;
-  display: flex; align-items: center; gap: 6px;
-  background: linear-gradient(180deg, #5c9de6 0%, #2b6bcf 50%, #1a4aa0 100%);
-  border: 1px solid rgba(255,255,255,0.3);
+  min-width: 150px; max-width: 220px;
+  padding: 0 12px;
+  display: flex; align-items: center; gap: 8px;
+  background: linear-gradient(180deg, #6ba9e8 0%, #3b7bce 45%, #1e5cba 55%, #164798 100%);
+  border: 1px solid rgba(0,0,0,0.3);
   border-radius: 3px;
   color: white;
+  font-family: "Tahoma", sans-serif;
   font-size: 11px;
   font-weight: 600;
   text-shadow: 0 1px 1px rgba(0,0,0,0.5);
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), inset 0 -2px 4px rgba(0,0,0,0.2);
   cursor: pointer;
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
+  transition: filter 0.12s;
 }
-.taskbar-tab.active {
-  background: linear-gradient(180deg, #1a3c75 0%, #2b58a8 50%, #4a90e2 100%);
-  box-shadow: inset 0 2px 5px rgba(0,0,0,0.4);
+.taskbar-tab.raised:hover { filter: brightness(1.1); }
+.taskbar-tab.pressed {
+  background: linear-gradient(180deg, #164798 0%, #1a54b0 50%, #2b6bcf 100%);
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.5), inset 0 -1px 0 rgba(255,255,255,0.15);
 }
-.taskbar-tab:hover { filter: brightness(1.1); }
+.taskbar-tab.pressed .tab-label { text-shadow: 0 1px 2px rgba(0,0,0,0.7); }
+.tab-label { overflow: hidden; text-overflow: ellipsis; flex: 1; text-align: left; }
 
+/* System tray (recessed dark blue) */
 .system-tray {
-  margin-left: auto;
-  height: 30px;
+  height: 28px;
   display: flex; align-items: center; gap: 10px;
-  padding: 0 12px;
-  background: linear-gradient(180deg, rgba(30,80,170,0.6), rgba(20,60,140,0.4));
-  border-left: 1px solid rgba(255,255,255,0.35);
+  padding: 0 10px;
+  background: linear-gradient(180deg, #103b7a 0%, #0e3068 50%, #144a92 100%);
+  border-left: 1px solid rgba(255,255,255,0.15);
   border-radius: 3px 0 0 3px;
-  color: white;
+  color: #dceafc;
   font-family: "Tahoma", sans-serif;
   font-size: 11px;
-  text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+  text-shadow: 0 1px 1px rgba(0,0,0,0.6);
+  box-shadow: inset 1px 1px 4px rgba(0,0,0,0.5);
+}
+.tray-clock {
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+  color: #ffffff;
+  padding-left: 4px;
+}
+.tray-sep {
+  width: 1px; height: 18px;
+  background: linear-gradient(180deg, transparent, rgba(255,255,255,0.3), transparent);
+}
+
+/* AI Day/Night toggle switch */
+.tray-toggle {
+  display: flex; align-items: center; gap: 6px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: #dceafc;
+  font-size: 11px;
+  padding: 0;
+}
+.tray-toggle-track {
+  position: relative;
+  width: 34px; height: 16px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #0b2554 0%, #0f3a80 100%);
+  border: 1px solid #051638;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,0.7), inset 0 -1px 0 rgba(255,255,255,0.08);
+  transition: background 0.2s;
+}
+.tray-toggle-track.day {
+  background: linear-gradient(180deg, #ffb84a 0%, #ff8a1e 100%);
+  border-color: #7a3a00;
+}
+.tray-toggle-thumb {
+  position: absolute; top: 1px;
+  width: 14px; height: 14px;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #ffffff 0%, #dbe8f6 55%, #a4c2e8 100%);
+  border: 1px solid rgba(0,0,0,0.4);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.9), 0 1px 2px rgba(0,0,0,0.5);
+  display: flex; align-items: center; justify-content: center;
+  transition: left 0.22s cubic-bezier(.4,1.6,.5,1);
+}
+.tray-toggle-track.day .tray-toggle-thumb { left: 18px; }
+.tray-toggle-track.night .tray-toggle-thumb { left: 1px; }
+.tray-toggle-label { font-weight: 600; letter-spacing: 0.3px; }
+
+/* --- Desktop shortcut grid (left column, only 2 apps per new spec) --- */
+.desktop-shortcut-grid {
+  position: absolute;
+  top: 18px; left: 18px;
+  display: flex; flex-direction: column;
+  gap: 14px;
+  z-index: 5;
+}
+
+/* When any window is being dragged, drop backdrop-blur to save GPU. */
+.retrodesk-root.is-dragging .aero-glass,
+.retrodesk-root.is-dragging .rmsg-emoji-picker {
+  backdrop-filter: none !important;
+  -webkit-backdrop-filter: none !important;
 }
 
 /* --- Desktop icon --- */
@@ -157,56 +274,99 @@
 }
 
 /* --- Window chrome --- */
+.window-frame {
+  position: absolute;
+  top: 0; left: 0;
+  border-radius: 8px 8px 8px 8px;
+  overflow: hidden;
+  will-change: transform;
+}
 .win-shadow { box-shadow: 0 20px 40px rgba(0,30,80,0.4), 0 8px 16px rgba(0,0,0,0.3); }
 
 .win-titlebar {
   height: 30px;
   display: flex; align-items: center; gap: 6px;
-  padding: 0 6px 0 10px;
-  background: linear-gradient(180deg, #4c9ff5 0%, #1c5fc4 8%, #2b7be2 40%, #1e5cba 90%, #164798 100%);
+  padding: 0 4px 0 10px;
+  background:
+    linear-gradient(180deg,
+      #4fa4f6 0%,
+      #1a5cc0 6%,
+      #2678e0 30%,
+      #2b7be2 55%,
+      #1a54b0 85%,
+      #103e8c 100%);
   color: white;
-  font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+  font-family: "Tahoma", "Trebuchet MS", "Segoe UI", sans-serif;
   font-weight: 700;
   font-size: 12px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.55);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(0,0,0,0.25);
   cursor: grab;
+  user-select: none;
 }
-.win-titlebar:active { cursor: grabbing; }
-.win-titlebar.inactive {
-  background: linear-gradient(180deg, #b8c8d8 0%, #7d97b8 50%, #5f7ea0 100%);
+.window-frame.is-inactive .win-titlebar {
+  background: linear-gradient(180deg, #a9bdd6 0%, #7590b0 50%, #5c7996 100%);
+  color: #eaf1fb;
 }
+.win-title-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.win-controls { display: flex; align-items: center; gap: 2px; }
 
 .win-btn {
   width: 22px; height: 20px;
-  border-radius: 4px;
-  border: 1px solid rgba(0,0,0,0.4);
+  border-radius: 3px;
+  border: 1px solid rgba(0,0,0,0.5);
   display: flex; align-items: center; justify-content: center;
   color: white;
   font-family: "Marlett", "Tahoma", sans-serif;
   font-size: 11px;
   font-weight: 700;
   cursor: pointer;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.5), 0 1px 2px rgba(0,0,0,0.3);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 2px rgba(0,0,0,0.3), 0 1px 2px rgba(0,0,0,0.3);
   transition: filter 0.1s, transform 0.1s;
+  padding: 0;
 }
-.win-btn:hover { filter: brightness(1.15); }
-.win-btn:active { transform: translateY(1px); }
-.win-btn.minimize { background: linear-gradient(180deg, #79c1ff, #3878cf); }
-.win-btn.maximize { background: linear-gradient(180deg, #79c1ff, #3878cf); }
-.win-btn.close    { background: linear-gradient(180deg, #ff9494, #d63030 50%, #a91616 100%); }
+.win-btn:hover { filter: brightness(1.18); }
+.win-btn:active { transform: translateY(1px); box-shadow: inset 0 2px 3px rgba(0,0,0,0.4); }
+.win-btn.minimize {
+  background: linear-gradient(180deg, #a4d8ff 0%, #4a90e2 50%, #1c5fc4 100%);
+}
+.win-btn.maximize {
+  background: linear-gradient(180deg, #a4d8ff 0%, #4a90e2 50%, #1c5fc4 100%);
+}
+.win-btn.close {
+  background: linear-gradient(180deg, #ffb0b0 0%, #e04a4a 40%, #b81616 100%);
+  width: 26px;
+}
+.ctrl-glyph-minimize {
+  display: inline-block; width: 8px; height: 2px;
+  background: #fff; margin-top: 8px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+.ctrl-glyph-maximize {
+  display: inline-block; width: 9px; height: 9px;
+  border: 1.5px solid #fff; border-top-width: 2.5px;
+  border-radius: 1px;
+  box-shadow: 0 1px 0 rgba(0,0,0,0.3);
+}
+.ctrl-glyph-close {
+  display: inline-block; font-size: 12px; line-height: 1;
+  color: #fff; text-shadow: 0 1px 1px rgba(0,0,0,0.5);
+  font-weight: 900;
+}
 
 .win-body {
-  background: linear-gradient(180deg, #e8f0fc 0%, #d0dfef 100%);
-  border-left: 1px solid #7ba7d9;
-  border-right: 1px solid #7ba7d9;
-  border-bottom: 1px solid #7ba7d9;
-  border-bottom-left-radius: 8px;
-  border-bottom-right-radius: 8px;
+  background: linear-gradient(180deg, #edf3fc 0%, #d5e2f3 100%);
+  border-left: 2px solid;
+  border-right: 2px solid;
+  border-bottom: 2px solid;
+  border-color: #4a7ab5 #1a3c75 #1a3c75 #4a7ab5;
+  border-bottom-left-radius: 6px;
+  border-bottom-right-radius: 6px;
   overflow: hidden;
   position: relative;
+  box-shadow: inset 1px 1px 0 rgba(255,255,255,0.6);
 }
 
 .win-resize-handle {
@@ -264,16 +424,577 @@
 }
 
 /* ============================================================
-   MOODDECK
+   MOODDECK — Pioneer DDJ-inspired dark matte + orange glow
    ============================================================ */
 
 .mooddeck {
-  background: #0d0d0d;
+  background:
+    radial-gradient(circle at 20% 0%, #1a1a1a, transparent 60%),
+    radial-gradient(circle at 80% 100%, #181818, transparent 60%),
+    #0a0a0a;
   color: #f0f0f0;
   height: 100%;
   overflow: auto;
+  padding: 12px;
+  display: flex; flex-direction: column;
+  gap: 10px;
+  position: relative;
+  background-image:
+    linear-gradient(#0d0d0d 1px, transparent 1px),
+    linear-gradient(90deg, #0d0d0d 1px, transparent 1px);
+  background-size: 24px 24px, 24px 24px;
 }
 
+/* ---- HEADER ---- */
+.mixer-header {
+  display: grid;
+  grid-template-columns: 260px 1fr 110px;
+  gap: 10px;
+  background: linear-gradient(180deg, #1c1c1c 0%, #0f0f0f 100%);
+  border: 1px solid #000;
+  border-radius: 8px;
+  padding: 10px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.segment-display {
+  background: linear-gradient(180deg, #0a0a0a 0%, #050505 100%);
+  border: 1px solid #000;
+  border-radius: 4px;
+  padding: 8px 10px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.9), inset 0 0 12px rgba(255,85,0,0.15);
+  display: flex; flex-direction: column; gap: 3px;
+  font-family: "VT323", "Courier New", monospace;
+  position: relative;
+  overflow: hidden;
+}
+.segment-display::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: repeating-linear-gradient(0deg, rgba(255,120,50,0.05) 0px, transparent 1px, transparent 2px, rgba(255,120,50,0.05) 3px);
+  pointer-events: none;
+}
+.segment-line {
+  display: flex; align-items: baseline; gap: 6px;
+  font-size: 13px;
+}
+.segment-value {
+  color: #ff8833;
+  text-shadow: 0 0 8px rgba(255,120,50,0.8);
+  font-family: "VT323", monospace;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  flex: 1;
+}
+.segment-value.dim { color: #cc6620; opacity: 0.85; font-size: 14px; }
+.segment-time {
+  margin-top: auto;
+  font-family: "VT323", monospace;
+  font-size: 20px;
+  color: #ff8833;
+  text-shadow: 0 0 10px rgba(255,120,50,0.9);
+  text-align: right;
+}
+
+.visualizer-wrap {
+  display: flex; flex-direction: column;
+  padding: 6px 8px;
+  background: #050505;
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
+}
+#audio-visualizer { display: block; }
+
+/* Hardware toggle switch */
+.adv-toggle-wrap {
+  display: flex; flex-direction: column; align-items: center;
+  justify-content: center;
+  background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+  border: 1px solid #000;
+  border-radius: 6px;
+  padding: 8px 6px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+}
+.hardware-toggle {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  display: flex; flex-direction: column; align-items: center;
+}
+.hardware-toggle-slot {
+  width: 36px; height: 60px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, #050505 0%, #1a1a1a 100%);
+  border: 1px solid #000;
+  box-shadow: inset 0 2px 6px rgba(0,0,0,0.9), inset 0 -1px 0 rgba(255,255,255,0.06);
+  position: relative;
+}
+.hardware-toggle-thumb {
+  position: absolute;
+  left: 3px;
+  width: 28px; height: 26px;
+  border-radius: 5px;
+  background: linear-gradient(180deg, #6a6a6a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  border: 1px solid #000;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.35), 0 2px 4px rgba(0,0,0,0.7);
+  transition: top 0.2s cubic-bezier(.4,1.6,.5,1);
+}
+.hardware-toggle.on .hardware-toggle-thumb {
+  top: 3px;
+  background: linear-gradient(180deg, #ffb070 0%, #ff5500 50%, #cc3300 100%);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 0 12px rgba(255,85,0,0.8);
+}
+.hardware-toggle.off .hardware-toggle-thumb { top: 31px; }
+
+/* ---- BODY: dual deck ---- */
+.mixer-body {
+  display: grid;
+  grid-template-columns: 1fr 260px 1fr;
+  gap: 10px;
+  flex: 1;
+  min-height: 0;
+}
+
+.deck-panel {
+  background:
+    linear-gradient(180deg, #1c1c1c 0%, #0e0e0e 100%);
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 12px;
+  display: flex; flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.6);
+  position: relative;
+}
+.deck-badge {
+  align-self: flex-start;
+  font-family: "VT323", monospace;
+  font-size: 12px;
+  letter-spacing: 2px;
+  color: #ff8833;
+  text-shadow: 0 0 6px rgba(255,120,50,0.6);
+  padding: 2px 6px;
+  border: 1px solid #ff8833;
+  border-radius: 3px;
+  background: rgba(255,85,0,0.05);
+}
+
+.deck-transport {
+  display: flex; gap: 8px;
+  margin-top: 4px;
+}
+.hw-btn {
+  min-width: 48px; height: 36px;
+  padding: 0 10px;
+  border-radius: 6px;
+  background: linear-gradient(180deg, #2a2a2a 0%, #0a0a0a 100%);
+  border: 1px solid #000;
+  color: #ff8833;
+  font-family: "VT323", "Courier New", monospace;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1px;
+  cursor: pointer;
+  display: flex; align-items: center; justify-content: center;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 -2px 4px rgba(0,0,0,0.8),
+    0 2px 4px rgba(0,0,0,0.5);
+  transition: filter 0.12s;
+  text-shadow: 0 0 6px rgba(255,120,50,0.5);
+}
+.hw-btn:hover { filter: brightness(1.2); }
+.hw-btn:active { transform: translateY(1px); }
+.hw-btn.hw-cue {
+  border: 2px solid #ff8833;
+  box-shadow: inset 0 0 8px rgba(255,120,50,0.3), 0 0 8px rgba(255,120,50,0.4);
+}
+.hw-btn.hw-play {
+  color: #6cff6c;
+  border: 2px solid #4bcf4b;
+  text-shadow: 0 0 8px #4bcf4b;
+  width: 52px;
+}
+.hw-btn.hw-play.on {
+  background: linear-gradient(180deg, #3fbf3f 0%, #1a8a1a 100%);
+  color: #fff;
+  box-shadow: inset 0 0 10px rgba(0,0,0,0.4), 0 0 16px rgba(75,207,75,0.7);
+}
+
+/* Platter hardware — big circular deck like DDJ-FLX2 */
+.platter-hardware {
+  display: flex; flex-direction: column; align-items: center; gap: 6px;
+}
+.platter-outer {
+  position: relative;
+  width: 240px; height: 240px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 50% 50%, #1a1a1a 0%, #0a0a0a 70%, #000 100%);
+  padding: 10px;
+  box-shadow:
+    inset 0 0 30px rgba(0,0,0,0.95),
+    0 6px 18px rgba(0,0,0,0.7);
+  border: 1px solid #000;
+}
+/* Ridged rim */
+.platter-rim {
+  position: absolute; inset: 0;
+  border-radius: 50%;
+  background:
+    repeating-conic-gradient(from 0deg,
+      #1a1a1a 0deg, #0a0a0a 3deg, #1a1a1a 6deg);
+  mask: radial-gradient(circle, transparent 62%, black 62%, black 100%);
+  -webkit-mask: radial-gradient(circle, transparent 62%, black 62%, black 100%);
+  box-shadow: inset 0 0 20px rgba(0,0,0,0.9);
+}
+.platter-inner {
+  position: relative;
+  width: 100%; height: 100%;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at center,
+      #0a0a0a 0px, #0a0a0a 1px, #141414 2px, #0a0a0a 3px),
+    radial-gradient(circle at center, #141414, #050505);
+  display: flex; align-items: center; justify-content: center;
+  box-shadow:
+    inset 0 0 15px rgba(0,0,0,0.9),
+    inset 0 0 0 2px #050505,
+    inset 0 0 0 3px #ff8833;
+  cursor: grab;
+}
+.platter-inner:active { cursor: grabbing; }
+.platter-tracks {
+  position: absolute; inset: 8%;
+  border-radius: 50%;
+  background:
+    repeating-radial-gradient(circle at center,
+      transparent 0px,
+      transparent 2px,
+      rgba(255,255,255,0.03) 3px,
+      transparent 4px);
+  pointer-events: none;
+}
+.platter-label-ring {
+  width: 55%; height: 55%;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #333;
+  position: relative;
+  box-shadow: 0 0 10px rgba(255,85,0,0.25), inset 0 0 8px rgba(0,0,0,0.6);
+}
+.platter-label-ring img { width: 100%; height: 100%; object-fit: cover; }
+.platter-label-ring::after {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  width: 12px; height: 12px;
+  background: #050505;
+  border: 2px solid #333;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+}
+.platter-deck-num {
+  position: absolute;
+  top: 12px;
+  font-family: "Trebuchet MS", sans-serif;
+  font-weight: 900;
+  font-size: 22px;
+  color: rgba(255,255,255,0.12);
+  letter-spacing: 1px;
+}
+.platter-deck-num.left { right: 22px; }
+.platter-deck-num.right { left: 22px; }
+.platter-cue-arrow {
+  position: absolute;
+  top: 6px; left: 50%;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 10px solid #333;
+  transition: border-top-color 0.2s;
+}
+.platter-cue-arrow.on { border-top-color: #ff8833; filter: drop-shadow(0 0 6px #ff5500); }
+.platter-hint { color: #666; }
+
+/* ---- Center mix station ---- */
+.mix-center {
+  background: linear-gradient(180deg, #1c1c1c 0%, #0e0e0e 100%);
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 10px;
+  display: flex; flex-direction: column;
+  gap: 8px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.08), 0 6px 16px rgba(0,0,0,0.6);
+  transition: opacity 0.2s;
+}
+.knob-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 6px;
+  padding: 4px 6px;
+}
+.knob-hardware {
+  width: 52px; height: 52px;
+  border-radius: 50%;
+  background:
+    radial-gradient(circle at 30% 25%, #5a5a5a 0%, #1a1a1a 55%, #050505 100%);
+  border: 2px solid #000;
+  box-shadow:
+    inset 0 2px 3px rgba(255,255,255,0.18),
+    inset 0 -3px 5px rgba(0,0,0,0.9),
+    0 3px 8px rgba(0,0,0,0.7);
+  position: relative;
+  cursor: pointer;
+}
+.knob-hardware:hover { filter: brightness(1.1); }
+.knob-indicator {
+  position: absolute;
+  top: 4px; left: 50%;
+  width: 3px; height: 10px;
+  background: linear-gradient(180deg, #ffb070, #ff5500);
+  box-shadow: 0 0 6px #ff5500;
+  border-radius: 2px;
+  transform: translateX(-50%);
+}
+
+.fader-row {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  padding: 4px 12px;
+  flex: 1;
+  min-height: 0;
+}
+.fader-column { display: flex; flex-direction: column; align-items: center; gap: 4px; }
+.fader-track {
+  position: relative;
+  width: 20px;
+  flex: 1;
+  min-height: 60px;
+  background: linear-gradient(90deg, #050505, #1a1a1a, #050505);
+  border: 1px solid #000;
+  border-radius: 4px;
+  box-shadow: inset 0 0 4px rgba(0,0,0,0.9);
+  cursor: pointer;
+}
+.fader-scale {
+  position: absolute;
+  top: 0; bottom: 0; left: 50%;
+  width: 2px;
+  transform: translateX(-50%);
+  background: repeating-linear-gradient(180deg, #333 0 1px, transparent 1px 6px);
+}
+.fader-thumb {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 34px; height: 22px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #6a6a6a 0%, #2a2a2a 50%, #1a1a1a 100%);
+  border: 1px solid #000;
+  box-shadow:
+    inset 0 1px 0 rgba(255,255,255,0.35),
+    inset 0 -2px 3px rgba(0,0,0,0.7),
+    0 2px 5px rgba(0,0,0,0.6);
+  cursor: grab;
+}
+.fader-thumb::before {
+  content: "";
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  width: 20px; height: 2px;
+  background: #ff8833;
+  box-shadow: 0 0 4px #ff5500;
+  border-radius: 1px;
+}
+.crossfader {
+  padding: 4px 12px;
+}
+.crossfader-track {
+  position: relative;
+  height: 14px;
+  background: linear-gradient(180deg, #050505, #1a1a1a);
+  border: 1px solid #000;
+  border-radius: 3px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.9);
+}
+.crossfader-thumb {
+  position: absolute;
+  top: 50%; transform: translate(-50%, -50%);
+  width: 22px; height: 22px;
+  border-radius: 4px;
+  background: linear-gradient(180deg, #6a6a6a, #1a1a1a);
+  border: 1px solid #000;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,0.6);
+}
+
+/* ---- FOOTER: mood + companion ---- */
+.mixer-footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr 260px;
+  gap: 10px;
+  background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+  border: 1px solid #000;
+  border-radius: 10px;
+  padding: 12px;
+  position: relative;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+  min-height: 200px;
+}
+
+.mood-panel { display: flex; flex-direction: column; }
+.mood-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 6px;
+}
+
+.rec-card {
+  background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
+  border: 1px solid #ff8833;
+  border-radius: 8px;
+  padding: 10px;
+  display: flex; gap: 10px;
+  box-shadow: 0 0 15px rgba(255,85,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  align-items: flex-start;
+}
+.rec-cover {
+  width: 80px; height: 80px;
+  border-radius: 6px;
+  object-fit: cover;
+  border: 2px solid #333;
+  box-shadow: 0 0 12px rgba(255,85,0,0.25);
+  flex-shrink: 0;
+}
+.rec-empty {
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  background: linear-gradient(180deg, #141414, #080808);
+  border: 1px dashed #333;
+  border-radius: 8px;
+  padding: 12px;
+  text-align: center;
+}
+
+/* ---- Companion anchor (bottom-right absolute) ---- */
+.companion-anchor {
+  position: relative;
+  display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
+  padding: 4px;
+}
+.companion-bubble {
+  background: linear-gradient(180deg, #ffffff 0%, #fff2e0 100%);
+  color: #1a1a1a;
+  padding: 8px 12px;
+  border-radius: 12px;
+  border: 2px solid #ff8833;
+  font-family: "Trebuchet MS", sans-serif;
+  font-size: 12px;
+  font-weight: 700;
+  max-width: 220px;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 12px rgba(255,120,50,0.35);
+  position: relative;
+  margin-bottom: 8px;
+  text-align: center;
+}
+.companion-bubble::after {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -10px;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 8px solid transparent;
+  border-right: 8px solid transparent;
+  border-top: 10px solid #ff8833;
+}
+.companion-bubble::before {
+  content: "";
+  position: absolute;
+  left: 50%; bottom: -6px;
+  transform: translateX(-50%);
+  width: 0; height: 0;
+  border-left: 6px solid transparent;
+  border-right: 6px solid transparent;
+  border-top: 8px solid #fff2e0;
+  z-index: 1;
+}
+
+.chibi-wrap {
+  width: 140px; height: 140px;
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: pointer;
+  background: transparent;
+  animation: bobAndBreathe 3.4s ease-in-out infinite;
+  transform-origin: 50% 100%;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+}
+.chibi-wrap img {
+  width: 100%; height: 100%;
+  object-fit: contain;
+  pointer-events: none;
+}
+.chibi-wrap.chibi-female img {
+  /* Placeholder female variant — same chibi, tinted magenta/pink to differentiate */
+  filter: hue-rotate(300deg) saturate(1.6) brightness(1.05);
+}
+
+@keyframes bobAndBreathe {
+  0%   { transform: translateY(0) rotate(-1deg) scaleY(1); }
+  25%  { transform: translateY(-3px) rotate(0.5deg) scaleY(1.03); }
+  50%  { transform: translateY(0) rotate(1deg) scaleY(1); }
+  75%  { transform: translateY(-3px) rotate(-0.5deg) scaleY(1.03); }
+  100% { transform: translateY(0) rotate(-1deg) scaleY(1); }
+}
+
+/* Retro radio group */
+.gender-radio {
+  display: flex; gap: 10px;
+  margin-top: 6px;
+  padding: 4px 8px;
+  background: linear-gradient(180deg, #1a1a1a, #050505);
+  border: 1px solid #000;
+  border-radius: 12px;
+  box-shadow: inset 0 2px 4px rgba(0,0,0,0.7);
+}
+.retro-radio {
+  display: flex; align-items: center; gap: 6px;
+  cursor: pointer;
+  font-family: "VT323", monospace;
+  font-size: 14px;
+  color: #666;
+  letter-spacing: 1px;
+  padding: 2px 4px;
+}
+.retro-radio input {
+  /* Visually hide but still reachable by pointer events on the wrapping label. */
+  position: absolute;
+  opacity: 0;
+  width: 0; height: 0;
+  pointer-events: none;
+}
+.retro-radio-dot {
+  width: 12px; height: 12px;
+  border-radius: 50%;
+  background: radial-gradient(circle at 30% 30%, #333 0%, #000 60%);
+  border: 1px solid #000;
+  box-shadow: inset 0 1px 2px rgba(0,0,0,0.9);
+  position: relative;
+}
+.retro-radio.checked { color: #ff8833; }
+.retro-radio.checked .retro-radio-dot {
+  background: radial-gradient(circle at 30% 30%, #ffb070 0%, #ff5500 60%, #7a1c00 100%);
+  box-shadow: 0 0 6px #ff5500, inset 0 1px 0 rgba(255,255,255,0.4);
+}
+
+/* Legacy helpers kept ---- */
 .mooddeck-panel {
   background:
     linear-gradient(180deg, #2a2a2a 0%, #141414 50%, #0a0a0a 100%);

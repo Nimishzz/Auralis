@@ -1,8 +1,8 @@
 import "./App.css";
-import Desktop from "./components/Desktop";
+import DesktopShell from "./components/DesktopShell";
 
 function App() {
-  return <Desktop />;
+  return <DesktopShell />;
 }
 
 export default App;

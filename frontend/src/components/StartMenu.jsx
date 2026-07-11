@@ -39,14 +39,14 @@ export default function StartMenu({ onOpenApp, onClose }) {
       </div>
       <div className="start-menu-body">
         <div className="text-tiny font-bold text-[#7ba7d9] uppercase tracking-wider px-2 pb-1">Applications</div>
-        <button className="start-menu-item w-full text-left" data-testid="start-open-mooddeck" onClick={() => onOpenApp("mooddeck")}>
+        <button className="start-menu-item w-full text-left" data-testid="start-open-mooddeck" onClick={() => onOpenApp("music-mixer")}>
           <Music size={18} color="#ff8833" />
           <div>
             <div>MoodDeck</div>
             <div className="text-tiny opacity-70">DJ-inspired music player</div>
           </div>
         </button>
-        <button className="start-menu-item w-full text-left" data-testid="start-open-retromsg" onClick={() => onOpenApp("retromsg")}>
+        <button className="start-menu-item w-full text-left" data-testid="start-open-retromsg" onClick={() => onOpenApp("messenger")}>
           <MessageCircle size={18} color="#4a90e2" />
           <div>
             <div>RetroMSG</div>
