@@ -74,6 +74,7 @@ function Platter({ side, cover, isPlaying, label, onDrag, testId }) {
           dragConstraints={{ left: -60, right: 60, top: -60, bottom: 60 }}
           dragElastic={0.2}
           dragMomentum={false}
+          dragSnapToOrigin
           onDrag={(_, info) => {
             if (side === "left") onDrag && onDrag(info.delta.x);
             else onDrag && onDrag(-info.delta.y);
@@ -608,7 +609,7 @@ export default function MoodDeck({
             role="button"
             tabIndex={0}
           >
-            <div className="chibi-anim">
+            <div className={`chibi-anim ${isPlaying ? "is-playing" : ""}`}>
               <img src={CHIBI_URL} alt="companion" draggable={false} />
             </div>
           </div>

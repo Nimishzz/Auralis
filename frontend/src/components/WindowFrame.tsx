@@ -89,8 +89,8 @@ export default function WindowFrame(props: WindowFrameProps) {
   return (
     <motion.div
       layout={false}
-      initial={isMaximized ? { opacity: 0, scale: 0.95 } : { opacity: 0, scale: 0.9, x, y }}
-      animate={isMaximized ? { opacity: 1, scale: 1 } : { opacity: 1, scale: 1, x, y }}
+      initial={isMaximized ? { opacity: 0, scale: 0.95, x: 0, y: 0 } : { opacity: 0, scale: 0.9, x, y }}
+      animate={isMaximized ? { opacity: 1, scale: 1, x: 0, y: 0 } : { opacity: 1, scale: 1, x, y }}
       exit={{ opacity: 0, scale: 0.9 }}
       transition={{ type: "spring", stiffness: 320, damping: 30 }}
       drag={!isMaximized}

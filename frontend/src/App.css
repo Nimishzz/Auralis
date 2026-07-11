@@ -82,60 +82,74 @@
     0 8px 24px rgba(0,50,120,0.25);
 }
 
-/* --- Taskbar (40px, glossy Luna blue with specular highlight) --- */
+/* --- Taskbar (40px, iridescent Y2K holographic candy) --- */
 .taskbar {
   position: absolute; left: 0; right: 0; bottom: 0;
   height: 40px;
   background:
     linear-gradient(180deg,
-      #3f83e5 0%,
-      #245aad 5%,
-      #2b6bcf 14%,
-      #1e56b3 55%,
-      #1a4aa0 88%,
-      #2f6bd0 100%);
-  border-top: 1px solid #0f3a80;
-  box-shadow: 0 -2px 12px rgba(0,0,0,0.35);
+      rgba(255,255,255,0.5) 0%,
+      rgba(255,255,255,0.15) 6%,
+      transparent 14%,
+      transparent 100%),
+    linear-gradient(90deg,
+      #f8c8f5 0%,
+      #d9c4ff 20%,
+      #b8e6ff 40%,
+      #a7f3d0 60%,
+      #fff1a8 80%,
+      #ffc8dd 100%);
+  border-top: 1px solid rgba(255,255,255,0.9);
+  box-shadow: 0 -2px 12px rgba(180, 130, 220, 0.35), inset 0 -1px 0 rgba(180,130,220,0.3);
   display: flex; align-items: center; gap: 6px;
   padding: 0 6px 0 0;
   z-index: 100;
 }
 .taskbar-highlight {
   position: absolute; top: 0; left: 0; right: 0; height: 1px;
-  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.85) 50%, rgba(255,255,255,0));
+  background: linear-gradient(90deg, rgba(255,255,255,0), rgba(255,255,255,0.95) 50%, rgba(255,255,255,0));
   pointer-events: none;
 }
 
-/* Start button (green Luna pill) */
+/* Start button (chrome + holographic bubble) */
 .start-btn {
   height: 32px; padding: 0 20px 0 12px;
   display: flex; align-items: center; gap: 8px;
-  background: linear-gradient(180deg, #a4ec7c 0%, #66c94a 30%, #3aa02b 60%, #1c7d18 100%);
-  border: 1px solid #0d5a10;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.75) 0%, rgba(255,255,255,0) 45%),
+    linear-gradient(135deg,
+      #ffc8dd 0%,
+      #c4a7ff 25%,
+      #a7d8ff 50%,
+      #a7f3d0 75%,
+      #fff1a8 100%);
+  border: 1px solid rgba(255,255,255,0.9);
   border-radius: 4px 20px 20px 4px;
-  color: white;
+  color: #4a2a80;
   font-family: "Trebuchet MS", "Segoe UI", sans-serif;
   font-weight: 700;
   font-style: italic;
   font-size: 15px;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.55);
+  text-shadow: 0 1px 1px rgba(255,255,255,0.8);
   box-shadow:
-    inset 0 1px 0 rgba(255,255,255,0.7),
-    inset 0 -12px 14px rgba(0,50,0,0.35),
-    inset 0 0 0 1px rgba(255,255,255,0.15),
-    0 2px 6px rgba(0,0,0,0.45);
+    inset 0 1px 0 rgba(255,255,255,0.95),
+    inset 0 -12px 14px rgba(180,130,220,0.25),
+    inset 0 0 0 1px rgba(255,255,255,0.5),
+    0 3px 8px rgba(180,130,220,0.5);
   cursor: pointer;
   transition: filter 0.15s;
   position: relative;
   z-index: 2;
 }
-.start-btn:hover { filter: brightness(1.08); }
-.start-btn:active { filter: brightness(0.9); }
+.start-btn:hover { filter: brightness(1.06) saturate(1.1); }
+.start-btn:active { filter: brightness(0.94); }
 .start-orb {
   display: inline-block;
   width: 18px; height: 18px; border-radius: 50%;
-  box-shadow: inset 0 -2px 3px rgba(0,0,0,0.4), 0 0 8px rgba(255,180,60,0.7);
-  border: 1px solid rgba(255,255,255,0.6);
+  background:
+    radial-gradient(circle at 30% 25%, #ffffff 0%, #ffc8dd 30%, #c4a7ff 60%, #a7d8ff 100%);
+  box-shadow: inset 0 -3px 4px rgba(180,130,220,0.4), inset 0 1px 2px rgba(255,255,255,0.9), 0 0 8px rgba(255,200,240,0.9);
+  border: 1px solid rgba(255,255,255,0.9);
 }
 .start-text { line-height: 1; }
 
@@ -288,27 +302,29 @@
   display: flex; align-items: center; gap: 6px;
   padding: 0 4px 0 10px;
   background:
-    linear-gradient(180deg,
-      #4fa4f6 0%,
-      #1a5cc0 6%,
-      #2678e0 30%,
-      #2b7be2 55%,
-      #1a54b0 85%,
-      #103e8c 100%);
-  color: white;
+    linear-gradient(180deg, rgba(255,255,255,0.65) 0%, rgba(255,255,255,0) 45%),
+    linear-gradient(90deg,
+      #ffc8dd 0%,
+      #c4a7ff 25%,
+      #a7d8ff 55%,
+      #a7f3d0 80%,
+      #fff1a8 100%);
+  color: #4a2a80;
   font-family: "Tahoma", "Trebuchet MS", "Segoe UI", sans-serif;
   font-weight: 700;
   font-size: 12px;
-  text-shadow: 1px 1px 2px rgba(0,0,0,0.55);
+  text-shadow: 0 1px 1px rgba(255,255,255,0.75);
   border-top-left-radius: 8px;
   border-top-right-radius: 8px;
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.55), inset 0 -1px 0 rgba(0,0,0,0.25);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.95), inset 0 -1px 0 rgba(180,130,220,0.35);
   cursor: grab;
   user-select: none;
 }
 .window-frame.is-inactive .win-titlebar {
-  background: linear-gradient(180deg, #a9bdd6 0%, #7590b0 50%, #5c7996 100%);
-  color: #eaf1fb;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.35) 0%, rgba(255,255,255,0) 50%),
+    linear-gradient(90deg, #e8dff2 0%, #d4d0e5 50%, #e5dff2 100%);
+  color: #7a6a9c;
 }
 .win-title-label { flex: 1; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .win-controls { display: flex; align-items: center; gap: 2px; }
@@ -330,13 +346,19 @@
 .win-btn:hover { filter: brightness(1.18); }
 .win-btn:active { transform: translateY(1px); box-shadow: inset 0 2px 3px rgba(0,0,0,0.4); }
 .win-btn.minimize {
-  background: linear-gradient(180deg, #a4d8ff 0%, #4a90e2 50%, #1c5fc4 100%);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, #d4e9ff 0%, #a7d8ff 55%, #7ab6f0 100%);
 }
 .win-btn.maximize {
-  background: linear-gradient(180deg, #a4d8ff 0%, #4a90e2 50%, #1c5fc4 100%);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, #eadcff 0%, #c4a7ff 55%, #9e82df 100%);
 }
 .win-btn.close {
-  background: linear-gradient(180deg, #ffb0b0 0%, #e04a4a 40%, #b81616 100%);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.85) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(180deg, #ffd0e0 0%, #ff8fb0 45%, #e04a70 100%);
   width: 26px;
 }
 .ctrl-glyph-minimize {
@@ -390,14 +412,20 @@
 }
 .start-menu-header {
   height: 56px;
-  background: linear-gradient(180deg, #4a9df5 0%, #1c5fc4 50%, #164798 100%);
+  background:
+    linear-gradient(180deg, rgba(255,255,255,0.6) 0%, rgba(255,255,255,0) 55%),
+    linear-gradient(90deg,
+      #ffc8dd 0%,
+      #c4a7ff 30%,
+      #a7d8ff 60%,
+      #a7f3d0 100%);
   display: flex; align-items: center; gap: 10px;
   padding: 0 14px;
-  color: white;
+  color: #4a2a80;
   font-family: "Trebuchet MS", sans-serif;
   font-weight: 700;
-  text-shadow: 0 1px 2px rgba(0,0,0,0.5);
-  border-bottom: 2px solid #ffb03a;
+  text-shadow: 0 1px 1px rgba(255,255,255,0.7);
+  border-bottom: 2px solid #ffd674;
 }
 .start-menu-body {
   background: linear-gradient(180deg, #f5f9ff 0%, #dbe8fa 100%);
@@ -556,8 +584,8 @@
   display: grid;
   grid-template-columns: 1fr 260px 1fr;
   gap: 10px;
-  flex: 1;
-  min-height: 0;
+  flex: 0 0 auto;
+  min-height: 340px;
 }
 
 .deck-panel {
@@ -839,22 +867,22 @@
 /* ---- FOOTER: mood + companion ---- */
 .mixer-footer {
   display: grid;
-  grid-template-columns: 1fr 1fr 260px;
-  gap: 10px;
+  grid-template-columns: 1fr 1fr 220px;
+  gap: 8px;
   background: linear-gradient(180deg, #1a1a1a, #0a0a0a);
   border: 1px solid #000;
   border-radius: 10px;
-  padding: 12px;
+  padding: 8px;
   position: relative;
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
-  min-height: 200px;
+  flex-shrink: 0;
 }
 
 .mood-panel { display: flex; flex-direction: column; }
 .mood-grid {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
-  gap: 6px;
+  gap: 4px;
 }
 
 .rec-card {
@@ -892,17 +920,18 @@
 .companion-bubble {
   background: linear-gradient(180deg, #ffffff 0%, #fff2e0 100%);
   color: #1a1a1a;
-  padding: 8px 12px;
+  padding: 6px 10px;
   border-radius: 12px;
   border: 2px solid #ff8833;
   font-family: "Trebuchet MS", sans-serif;
-  font-size: 12px;
+  font-size: 11px;
   font-weight: 700;
-  max-width: 220px;
+  max-width: 180px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.5), 0 0 12px rgba(255,120,50,0.35);
   position: relative;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   text-align: center;
+  line-height: 1.25;
 }
 .companion-bubble::after {
   content: "";
@@ -927,11 +956,11 @@
 }
 
 .chibi-wrap {
-  width: 140px; height: 140px;
+  width: 100px; height: 100px;
   border-radius: 12px;
   cursor: pointer;
   background: transparent;
-  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+  filter: drop-shadow(0 6px 10px rgba(0,0,0,0.55));
   /* Static click target — animation lives on the child .chibi-anim */
 }
 .chibi-anim {
@@ -957,6 +986,13 @@
   50%  { transform: translateY(0) rotate(1deg) scaleY(1); }
   75%  { transform: translateY(-3px) rotate(-0.5deg) scaleY(1.03); }
   100% { transform: translateY(0) rotate(-1deg) scaleY(1); }
+}
+
+.chibi-anim.is-playing { animation: chibiVibe 0.6s ease-in-out infinite; }
+@keyframes chibiVibe {
+  0%, 100% { transform: translateY(0) rotate(-3deg) scale(1); }
+  25%, 75% { transform: translateY(-8px) rotate(4deg) scale(1.05); }
+  50%      { transform: translateY(0) rotate(-3deg) scale(1); }
 }
 
 /* Retro radio group */

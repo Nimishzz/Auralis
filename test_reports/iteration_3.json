@@ -1,0 +1,67 @@
+{
+  "summary": "Fix-verification pass for the 6 explicit bugs listed by the user (RetroDesk / MoodDeck). All 6 bugs are resolved. Verified via Playwright at viewport 1920x900 (and 1024x600 / 1200x700 for viewport-shrink cases). Backend testing was skipped per request. AiSidebar, ChatGPT wiring, and the caricature background were intentionally not tested (out of scope).",
+  "backend_issues": { "critical": [], "minor": [] },
+  "frontend_issues": {
+    "ui_bugs": [],
+    "integration_issues": [],
+    "design_issues": [
+      {
+        "screen": "Taskbar tabs (when apps are open)",
+        "issues": [
+          ".taskbar-tab background at App.css:169 is still the classic XP Luna Blue gradient (#6ba9e8 → #164798). It's technically an in-taskbar element. If the intent of FIX 3 is 'zero solid XP blue anywhere on the taskbar', consider re-skinning open-app tabs to a glossy pastel bubble too. Left unchanged in this pass; flagging as design polish only (not part of the stated FIX 3 spec of 'chrome/holographic Start button + iridescent taskbar background + no XP blue on window chrome')."
+        ]
+      }
+    ]
+  },
+  "test_report_links": [],
+  "action_items": [
+    "(Optional polish) Re-skin .taskbar-tab (App.css:164-189) with a pastel Y2K bubble gradient so open-app tabs match the new theme."
+  ],
+  "critical_code_review_comments": [
+    "DesktopShell.tsx clampWindowGeometry accepts loose (untyped) params — consider typing it as (w: WindowInstance, ...) => WindowInstance for consistency with the surrounding TS module.",
+    "clampWindowGeometry uses viewportHeight - taskbarHeight - 4 and 240 min-height simultaneously; at viewport 1024x600 (600-40=560) height is correctly clamped to 556 — behaviour verified — but if a future viewport drops below 244 tall the min-height (240) can exceed available space and re-introduce taskbar overlap. Low priority.",
+    "In WindowFrame.tsx the drag ends compute nx/ny using dragConstraints.right/bottom which are re-derived only when width/height/taskbarHeight change — not when the parent container itself resizes. A window whose bounds haven't recomputed after a viewport resize could snap to a stale constraint on the next drag. DesktopShell now re-clamps on resize, so this is mostly compensated at the state level, but the constraints inside WindowFrame still lag by one drag.",
+    "chibi-anim now correctly toggles the is-playing class; however both bobAndBreathe and chibiVibe animate the same transform property from CSS while parent .chibi-wrap sits inside the AnimatePresence tree. No conflict observed in this run, but if framer-motion ever animates transform on the same node in the future they'll fight.",
+    "Platter's dragSnapToOrigin works, but onDrag still writes into audio.currentTime / volume on every mousemove — after release, the platter snaps back visually but the audio state does NOT snap back. That's likely intentional (scrub sticks; disc springs) but worth documenting."
+  ],
+  "updated_files": [],
+  "success_rate": { "backend": "N/A (skipped per request)", "frontend": "100% (6/6 requested fixes verified)" },
+  "seed_data_creation": "none",
+  "retest_needed": false,
+  "main_agent_can_self_test": true,
+  "context_for_next_testing_agent": "Verified data-testids for RetroDesk fix-pass: taskbar, start-button (via .start-btn class if data-testid absent), desktop-icon-music-mixer, desktop-icon-messenger, window-<id>, window-titlebar-<id>, window-max-<id>, window-min-<id>, window-close-<id>, window-resize-<id>. MoodDeck internals: mooddeck-app, advanced-mixer-toggle, mix-center, knob-{bass,mid,treble}, fader-1, fader-2, platter-left, platter-right (each contains .platter-inner motion.div with dragSnapToOrigin), btn-play/prev/next/cue/sync/loop, mood-chip-<9 ids>, recommendation-card (or .rec-empty when no mood chosen), rec-playlist-name, btn-play-playlist, mooddeck-companion, companion-character (contains .chibi-anim child which toggles is-playing class and animation-name chibiVibe on play), companion-speech-bubble, companion-switch-male, companion-switch-female. Window default geometry is 1100x720 at (60,40). Max view fills (0,0,1920,860) at 1920x900. clampWindowGeometry in DesktopShell handles viewport resize + restore-from-max re-clamp.",
+  "rca of the issue": {
+    "FIX 1 — Fullscreen maximize behavior": {
+      "status": "PASS",
+      "evidence": "WindowFrame motion.div now sets x:0,y:0 on animate when isMaximized (WindowFrame.tsx L92-93). Dragged mm window from (60,40) to (210,120), clicked window-max-music-mixer: bounding box became {x:-0.12, y:0, w:1920, h:860} at viewport 1920x900 — perfect fill. Restore returned to (210,120,1100,720), on-screen."
+    },
+    "FIX 2A — Windows fit above 40px taskbar on open": {
+      "status": "PASS",
+      "evidence": "At viewport 1200x700, opened both apps. music-mixer bbox bottom=660, messenger bbox bottom=660, both == viewport(700) - taskbar(40). openApp() now runs clampWindowGeometry (DesktopShell.tsx L118-138)."
+    },
+    "FIX 2B — Resize keeps windows in bounds": {
+      "status": "PASS",
+      "evidence": "After shrinking viewport 1920x900 → 1024x600 with music-mixer open, window auto-clamped to (4,4,1020,556). right=1024, bottom=560 — inside 1024x(600-40) constraint. Works because of the new resize useEffect (DesktopShell.tsx L167-179)."
+    },
+    "FIX 2C — Restore-from-maximize after browser resize": {
+      "status": "PASS",
+      "evidence": "Maximized at 1920x900 → resized viewport to 1024x600 while maximized (still fills 1024x560 because top:0/left:0 + calc(100vh-40px)). Clicked window-max to restore: bbox became (4,4,1020,556), inside viewport. toggleMaximize now feeds restored geometry through clampWindowGeometry (DesktopShell.tsx L155-165)."
+    },
+    "FIX 3 — Y2K holographic theme": {
+      "status": "PASS",
+      "evidence": "Taskbar background contains rgb(248,200,245)+rgb(217,196,255)+rgb(184,230,255)+rgb(167,243,208)+rgb(255,241,168) — full lavender/aqua/mint/butter gradient, no rgb(30,92,186) XP Luna Blue. Start button uses linear-gradient(135deg, #ffc8dd, #c4a7ff, #a7d8ff, #a7f3d0, #fff1a8) — chrome/holo bubble, no XP green. Window titlebar uses the same holographic 90deg gradient — no Luna blue detected. NOTE: .taskbar-tab (open-app pill in taskbar center) still uses the old XP Luna blue gradient — filed as low-priority design polish."
+    },
+    "FIX 5 — Platter drag snap-to-origin": {
+      "status": "PASS",
+      "evidence": "Drag platter-left inner disc 40px right → after release matrix tx=1.4 (~0, snapped). Drag platter-right inner disc 40px down → matrix ty=1.48 (~0, snapped). MoodDeck.jsx L77 adds dragSnapToOrigin on the motion.div."
+    },
+    "FIX 6 — Mixer footer visibility": {
+      "status": "PASS",
+      "evidence": "At default 1100x720 window / 1920x900 viewport with Advanced Mixer ON: knob-bass/mid/treble each 71x73, fader-1/2 each 101x179, elementFromPoint at center of each is the element itself (topAtCenter=OK, no obscuring layer). All 9 mood chips visible h=32. companion-character 100x100, companion-speech-bubble 159x30, companion-switch-male/female both visible with clickable text areas. .mixer-body flex:0 0 auto min-height:340px + .mixer-footer with 220px companion column resolved the crowding."
+    },
+    "FIX 8 — Companion reacts to playback": {
+      "status": "PASS",
+      "evidence": "Before btn-play click: .chibi-anim className='chibi-anim ', getComputedStyle(...).animationName='bobAndBreathe'. After click: className='chibi-anim is-playing', animationName='chibiVibe'. After second click (pause): className reverts to 'chibi-anim ', animationName back to 'bobAndBreathe'. MoodDeck.jsx L612 wires the className, App.css L991-996 defines chibiVibe keyframes."
+    }
+  }
+}

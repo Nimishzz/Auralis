@@ -52,6 +52,14 @@ const APPS: Record<AppId, AppEntry> = {
 
 const TASKBAR_HEIGHT = 40;
 
+function clampWindowGeometry(w, viewportWidth, viewportHeight, taskbarHeight) {
+  const width = Math.min(w.width, Math.max(320, viewportWidth - 4));
+  const height = Math.min(w.height, Math.max(240, viewportHeight - taskbarHeight - 4));
+  const maxX = Math.max(0, viewportWidth - width);
+  const maxY = Math.max(0, viewportHeight - taskbarHeight - height);
+  return { ...w, width, height, x: Math.min(Math.max(0, w.x), maxX), y: Math.min(Math.max(0, w.y), maxY) };
+}
+
 // Classic high-saturation landscape wallpaper — XP Bliss inspired (bright green hills for day).
 const WALLPAPER_DAY =
   "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80";
@@ -115,7 +123,12 @@ export default function DesktopShell() {
         setWindows((prev) =>
           prev.map((w) =>
             w.appId === appId
-              ? { ...w, isOpen: true, isMinimized: false, zIndex: nextZ }
+              ? clampWindowGeometry(
+                  { ...w, isOpen: true, isMinimized: false, zIndex: nextZ },
+                  window.innerWidth,
+                  window.innerHeight,
+                  TASKBAR_HEIGHT,
+                )
               : w,
           ),
         );
@@ -141,8 +154,28 @@ export default function DesktopShell() {
 
   const toggleMaximize = useCallback((id: string) => {
     setWindows((prev) =>
-      prev.map((w) => (w.id === id ? { ...w, isMaximized: !w.isMaximized } : w)),
+      prev.map((w) => {
+        if (w.id !== id) return w;
+        const next = { ...w, isMaximized: !w.isMaximized };
+        return next.isMaximized
+          ? next
+          : clampWindowGeometry(next, window.innerWidth, window.innerHeight, TASKBAR_HEIGHT);
+      }),
     );
+  }, []);
+
+  useEffect(() => {
+    const onResize = () => {
+      setWindows((prev) =>
+        prev.map((w) =>
+          w.isOpen && !w.isMaximized
+            ? clampWindowGeometry(w, window.innerWidth, window.innerHeight, TASKBAR_HEIGHT)
+            : w,
+        ),
+      );
+    };
+    window.addEventListener("resize", onResize);
+    return () => window.removeEventListener("resize", onResize);
   }, []);
 
   const moveWindow = useCallback((id: string, x: number, y: number) => {
