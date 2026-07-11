@@ -608,7 +608,9 @@ export default function MoodDeck({
             role="button"
             tabIndex={0}
           >
-            <img src={CHIBI_URL} alt="companion" draggable={false} />
+            <div className="chibi-anim">
+              <img src={CHIBI_URL} alt="companion" draggable={false} />
+            </div>
           </div>
 
           <div className="gender-radio" role="radiogroup" aria-label="Companion gender">

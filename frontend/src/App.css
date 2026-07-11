@@ -928,13 +928,18 @@
 
 .chibi-wrap {
   width: 140px; height: 140px;
-  overflow: hidden;
   border-radius: 12px;
   cursor: pointer;
   background: transparent;
+  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+  /* Static click target — animation lives on the child .chibi-anim */
+}
+.chibi-anim {
+  width: 100%; height: 100%;
+  overflow: hidden;
   animation: bobAndBreathe 3.4s ease-in-out infinite;
   transform-origin: 50% 100%;
-  filter: drop-shadow(0 8px 12px rgba(0,0,0,0.6));
+  pointer-events: none;
 }
 .chibi-wrap img {
   width: 100%; height: 100%;

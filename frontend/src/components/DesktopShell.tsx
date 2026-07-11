@@ -51,9 +51,9 @@ const APPS: Record<AppId, AppEntry> = {
 
 const TASKBAR_HEIGHT = 40;
 
-// Classic high-saturation landscape wallpaper — XP Bliss inspired.
+// Classic high-saturation landscape wallpaper — XP Bliss inspired (bright green hills for day).
 const WALLPAPER_DAY =
-  "https://images.unsplash.com/photo-1465101162946-4377e57745c3?auto=format&fit=crop&w=1920&q=80";
+  "https://images.unsplash.com/photo-1501785888041-af3ef285b470?auto=format&fit=crop&w=1920&q=80";
 const WALLPAPER_NIGHT =
   "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1920&q=80";
 
