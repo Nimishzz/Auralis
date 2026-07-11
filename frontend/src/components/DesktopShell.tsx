@@ -7,7 +7,8 @@ import StartMenu from "./StartMenu";
 import DesktopIcon from "./DesktopIcon";
 import WindowFrame from "./WindowFrame";
 import MoodDeck from "./mooddeck/MoodDeck";
-import RetroMSG from "./retromsg/RetroMSG";
+import RetroMessenger from "./retromsg/RetroMessenger";
+import AiSidebar from "./AiSidebar";
 
 // -----------------------------------------------------------------------------
 // App registry — id → title, icon, default geometry, component
@@ -38,12 +39,12 @@ const APPS: Record<AppId, AppEntry> = {
   },
   messenger: {
     id: "messenger",
-    title: "RetroMSG",
+    title: "RetroMessenger",
     Icon: MessageCircle,
     iconColor: "#4a90e2",
-    Component: RetroMSG,
-    defaultWidth: 860,
-    defaultHeight: 560,
+    Component: RetroMessenger,
+    defaultWidth: 900,
+    defaultHeight: 600,
     defaultX: 180,
     defaultY: 110,
   },
@@ -212,7 +213,7 @@ export default function DesktopShell() {
             key={app.id}
             id={app.id}
             label={
-              app.id === "music-mixer" ? "MoodDeck Music" : "RetroMSG Messenger"
+              app.id === "music-mixer" ? "MoodDeck Music" : "RetroMessenger"
             }
             Icon={app.Icon}
             color={app.iconColor}
@@ -269,6 +270,9 @@ export default function DesktopShell() {
           onClose={() => setStartOpen(false)}
         />
       )}
+
+      {/* --- AI Sidebar (right-docked overlay, above windows) --- */}
+      <AiSidebar theme={theme} />
 
       {/* --- Taskbar --- */}
       <Taskbar

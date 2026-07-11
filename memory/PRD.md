@@ -43,10 +43,24 @@ Nostalgic Y2K / Windows XP / Frutiger Aero fake desktop OS shell hosting two app
 - **Bottom footer**: mood chips grid (9 moods) | recommendation card (cover + playlist name + artist + track count + big green PLAY PLAYLIST button) | **companion anchor** (bottom-right).
 - Companion: 140×140 chibi image (customer-provided dark-streetwear artwork), `bobAndBreathe` keyframe animation on inner wrapper (click target stays stable for automation), speech bubble "What's your mood today?" that updates per-mood, retro `<label>`-wrapped radio group (Male / Female) — female applies `filter: hue-rotate(300deg) saturate(1.6)`.
 
-### RetroMSG (unchanged from iteration 1)
-- Sidebar with profile + search + 7 contacts.
-- Instagram-style stories row with auto-dismissing story modal.
-- Chat with typing indicator, timestamps, image/voice placeholder bubbles, emoji picker, fake replies.
+### RetroMessenger (2026-02, iteration 4 — Outlook Express 2004 email client)
+- Replaced the Instagram-style RetroMSG (per new spec: "explicitly reject all modern chat UI paradigms").
+- Sharp 90° corners, Win95 inset/outset bezel borders (border-t-white border-l-white border-b-gray-600 border-r-gray-600 pattern), 11px Tahoma throughout.
+- **Toolbar**: flat gray square buttons with tiny inline pixel-art icon boxes: New Message, Reply, Forward, Delete (lucide icons in bordered mini-frames).
+- **Left menu**: folder list (Inbox with bold + unread badge (2), Sent Items, Drafts, Trash). Active folder gets W95 dark blue (`#000080`).
+- **Right top pane**: real HTML `<table>` with sharp borders, columns Priority(!)/From/Subject/Date Received, 3 mock emails, selected row gets `bg-[#000080] text-white`.
+- **Right bottom pane**: recessed white reading box (monospace Courier plaintext body) showing whichever row is selected, with From/Subject/Date header strip.
+- Status bar footer with unread count + last check time.
+
+### AiSidebar (2026-02, iteration 4 — Vista-AI Engine v1.0)
+- Right-docked overlay: `position:absolute; right:0; height:calc(100vh - 40px); width:320px`.
+- Framer-motion animated: `animate={{ x: open ? 0 : "calc(100% - 26px)" }}` over 300ms with cubic-bezier ease. Only the 26px vertical handle tab pokes out when collapsed.
+- **Theme-adaptive** (reads `theme: "day" | "night"` from DesktopShell state):
+  - Day → glossy silver-white plastic gradient, 1px steel border, dark text, blue status dot.
+  - Night → brushed-steel repeating gradient with neon-green (`#00ff88`) borders + text + glow shadows, matrix-green status dot pulsing.
+- **Interior**: header with animated pixel-art SVG monitor (blinking scanline rects) + "Vista-AI Engine v1.0" + pulsing status dot. Scroll history mimics AIM feed — bold `*User:` (day: navy / night: glowing white) and `**AI:*` (day: rust / night: glowing green) prefixes with timestamps. Textarea input + boxy tactile "SEND COMMAND" button. Component exposes `onSendMessage: (msg: string) => void` callback.
+- Fake replies from a `CANNED_REPLIES` pool arrive ~1s after each user submit.
+
 
 ## Testing status
 - **iteration_2 (this delivery)**: 17/17 requested scenarios pass. No console errors, no functional bugs. Two low-priority nits already fixed (day wallpaper swap + moved bobAndBreathe onto a non-clickable child element).

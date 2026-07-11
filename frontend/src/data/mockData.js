@@ -204,3 +204,101 @@ export const CONVERSATIONS = {
     { id: "m1", from: "c7", kind: "text", text: "lol ok", time: "4:30 PM" }
   ]
 };
+
+// ================= RETROMESSENGER (Outlook-Express style) =================
+
+export const MAIL_FOLDERS = [
+  { id: "inbox",   label: "Inbox",       icon: "📥" },
+  { id: "sent",    label: "Sent Items",  icon: "📤" },
+  { id: "drafts",  label: "Drafts",      icon: "📝" },
+  { id: "trash",   label: "Trash",       icon: "🗑" },
+];
+
+export const EMAILS = [
+  {
+    id: "e1",
+    priority: "high",
+    from: "system@retrodesk.net",
+    subject: "Welcome to RetroDesk 2004 Edition",
+    date: "01/14/04",
+    dateFull: "Wednesday, January 14, 2004  10:42 AM",
+    read: false,
+    body:
+`Dear Registered User,
+
+Thank you for installing RetroDesk 2004 Edition (Build 7601.SP2).
+
+This message confirms that your desktop environment has been
+successfully configured. Please take a moment to review the
+following important information:
+
+  * Two applications are pre-installed: MoodDeck and RetroMessenger
+  * The Start menu is located in the lower-left corner of your screen
+  * Your Vista-AI Engine sidebar can be opened from the right edge
+
+If you experience any issues, please contact your system administrator
+or visit http://support.retrodesk.net (a 56k modem is recommended).
+
+Sincerely,
+The RetroDesk Team
+--
+This is an automated message. Please do not reply.`,
+  },
+  {
+    id: "e2",
+    priority: "normal",
+    from: "luna.beats@hotmail.com",
+    subject: "Re: playlist for the road trip",
+    date: "01/13/04",
+    dateFull: "Tuesday, January 13, 2004  08:11 PM",
+    read: false,
+    body:
+`hey!!
+
+so i put together the mixtape for saturday. burned two copies
+onto CD-R (one for the car stereo, one backup in case it skips).
+
+tracklist:
+  01. golden hour   - aurora beats
+  02. neon streets  - mono blue
+  03. route 66      - chrome kids
+  04. slow motion   - nova haze
+  05. rear-view     - wheelspin
+  ...and 12 more
+
+let me know if you want anything added. we should hit the road
+by 9am sharp so we don't get stuck in traffic near the border.
+
+cya!
+- luna
+p.s. don't forget the snacks this time`,
+  },
+  {
+    id: "e3",
+    priority: "normal",
+    from: "no-reply@geocities.com",
+    subject: "Your GeoCities page has 42 new visitors!",
+    date: "01/12/04",
+    dateFull: "Monday, January 12, 2004  03:07 PM",
+    read: true,
+    body:
+`GeoCities Visitor Report
+========================
+
+Site: /SunsetStrip/9042/pixelbunny/
+
+This week your homepage received 42 new visitors, an
+increase of +18% compared to last week. Congratulations!
+
+Top referring pages:
+  - webring.pixelbunny.friends
+  - links.gothpage.tripod.com
+  - guestbook.retrodesk.net
+
+Sign in to the GeoCities Neighborhood dashboard to see
+your full analytics, animated GIF quota, and visitor
+guestbook entries.
+
+- The GeoCities Team`,
+  },
+];
