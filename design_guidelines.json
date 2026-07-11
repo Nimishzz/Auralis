@@ -1,0 +1,114 @@
+{
+  "theme": "hybrid",
+  "description": "Nostalgic Y2K/Windows XP-inspired desktop with modern functional twists. Incorporates Frutiger Aero aesthetics (gloss, bubbles, gradients) for the OS shell and RetroMSG, while utilizing a dark, tactical skeuomorphic aesthetic for MoodDeck.",
+  "typography": {
+    "primary_font": "'Segoe UI', Tahoma, Verdana, sans-serif",
+    "heading_font": "'Trebuchet MS', 'Segoe UI', sans-serif",
+    "mono_font": "'Courier New', monospace",
+    "rules": [
+      "Use Tahoma/Verdana vibe for OS elements to evoke Web 1.0/2.0 nostalgia.",
+      "Headings should be crisp. Avoid excessive font weights; stick to 400 or 600.",
+      "MoodDeck should use small, uppercase mono-spaced or tracking-widened sans-serif fonts for hardware labels.",
+      "RetroMSG uses modern standard readable fonts for messages but retro UI fonts for menus."
+    ]
+  },
+  "colors": {
+    "os_shell": {
+      "taskbar_bg": "linear-gradient(180deg, #4a90e2 0%, #2b58a8 45%, #4a90e2 50%, #1a3c75 100%)",
+      "window_header": "linear-gradient(180deg, #00c6ff 0%, #0072ff 100%)",
+      "start_button": "linear-gradient(180deg, #00ff9d 0%, #00a859 100%)",
+      "start_button_hover": "linear-gradient(180deg, #5cffc1 0%, #00c266 100%)",
+      "desktop_selection": "rgba(43, 88, 168, 0.4)"
+    },
+    "mood_deck": {
+      "background": "#111111",
+      "panel": "#1a1a1a",
+      "border": "#222222",
+      "accent_glow": "#FF5500",
+      "led_green": "#00FF00",
+      "led_red": "#FF0000",
+      "text_primary": "#FFFFFF",
+      "text_muted": "#888888",
+      "platter_base": "#0a0a0a"
+    },
+    "retro_msg": {
+      "background": "#F5F7FA",
+      "sidebar": "#E1E8F0",
+      "header": "#D0DCE8",
+      "my_bubble": "linear-gradient(180deg, #4a90e2 0%, #2b58a8 100%)",
+      "their_bubble": "#FFFFFF",
+      "text_dark": "#333333"
+    }
+  },
+  "visual_enhancers": {
+    "frutiger_aero_glass": "backdrop-filter: blur(10px); background: rgba(255, 255, 255, 0.2); border: 1px solid rgba(255, 255, 255, 0.5); box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6), 0 4px 6px rgba(0, 0, 0, 0.1);",
+    "glossy_button": "background: linear-gradient(180deg, #4a90e2 0%, #2b58a8 45%, #63a4ff 50%, #2b58a8 100%); border: 1px solid #1a3c75; box-shadow: inset 0 1px 0 rgba(255,255,255,0.4), 0 2px 4px rgba(0,0,0,0.3); border-radius: 8px;",
+    "mooddeck_plastic": "background: #1a1a1a; border: 1px solid #000; box-shadow: inset 0 1px 2px rgba(255,255,255,0.1), 0 4px 8px rgba(0,0,0,0.5); border-radius: 4px;",
+    "mooddeck_glow": "box-shadow: 0 0 10px rgba(255, 85, 0, 0.6), inset 0 0 5px rgba(255, 85, 0, 0.4);"
+  },
+  "components": {
+    "Taskbar": "Fixed at bottom. Contains Start button on left, open app tabs in middle, system tray (clock, icons) on right. Use deep blue glossy gradient.",
+    "Window": "Draggable container using framer-motion. Top bar has title, minimize, maximize, close buttons (red/yellow/green XP style or glossy blue). Body contains the app content.",
+    "Desktop Icon": "Grid item on desktop. Image icon top, white text with black drop shadow below.",
+    "MoodDeck_Platter": "Large circular div, brushed metal rings, center displays album art. Rotates when playing.",
+    "MoodDeck_Companion": "SVG or CSS-based pixel art character. Add simple CSS animations: scaleY for breathing, translateY for head bob, and a speech bubble component.",
+    "RetroMSG_Bubble": "Modern chat bubbles but framed within a nostalgic window. Use heavy drop shadows on the application window itself.",
+    "Knob": "CSS circular element with a small indicator line. Requires some simple state mapping to rotation degrees."
+  },
+  "layouts": {
+    "desktop": "Relative full screen container `w-screen h-screen overflow-hidden` with wallpaper background. Taskbar absolute bottom.",
+    "mood_deck": "Flex or Grid layout. Left side: Platter and transport controls. Right side: Mood chips, Playlist recommend card, and Companion character at the top.",
+    "retro_msg": "Flex row layout. Left sidebar (250px) for user profile, search, contacts. Right area for chat history and message input. Top row of chat area for Instagram-style stories."
+  },
+  "motion": {
+    "window_open": "Scale from 0.8 to 1, opacity 0 to 1, duration 0.2s ease-out.",
+    "platter_spin": "animate-spin on play, paused when not playing.",
+    "companion_breathe": "keyframes: scaleY(1) -> scaleY(1.05)",
+    "hover_gloss": "Brightness increase or slight translateY(-1px) on glossy buttons."
+  },
+  "image_urls": {
+    "wallpaper": {
+      "url": "https://images.unsplash.com/photo-1772720298864-453b571c9d1b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjA1NzR8MHwxfHNlYXJjaHwxfHxnbG9zc3klMjBidWJibGVzJTIwYmx1ZSUyMHNreSUyMHdhdGVyJTIwYmFja2dyb3VuZHxlbnwwfHx8fDE3ODM3Njc3MDJ8MA&ixlib=rb-4.1.0&q=85",
+      "description": "Frutiger Aero abstract floating bubbles background"
+    },
+    "album_cover": {
+      "url": "https://images.unsplash.com/photo-1633373513172-05e929f98e8b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NTYxODd8MHwxfHNlYXJjaHw0fHxlbGVjdHJvbmljJTIwbXVzaWMlMjBhbGJ1bSUyMGNvdmVyJTIwYXJ0fGVufDB8fHx8MTc4Mzc2NzY4Nnww&ixlib=rb-4.1.0&q=85",
+      "description": "Electronic music album cover art"
+    },
+    "avatar_1": {
+      "url": "https://images.unsplash.com/photo-1532074205216-d0e1f4b87368?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHw0fHx1c2VyJTIwcHJvZmlsZSUyMHBvcnRyYWl0JTIwcGhvdG9ncmFwaHl8ZW58MHx8fHwxNzgzNzY3Njg1fDA&ixlib=rb-4.1.0&q=85",
+      "description": "User profile 1"
+    },
+    "avatar_2": {
+      "url": "https://images.unsplash.com/photo-1506863530036-1efeddceb993?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwyfHx1c2VyJTIwcHJvZmlsZSUyMHBvcnRyYWl0JTIwcGhvdG9ncmFwaHl8ZW58MHx8fHwxNzgzNzY3Njg1fDA&ixlib=rb-4.1.0&q=85",
+      "description": "User profile 2"
+    },
+    "avatar_3": {
+      "url": "https://images.unsplash.com/photo-1535713875002-d1d0cf377fde?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwxfHx1c2VyJTIwcHJvZmlsZSUyMHBvcnRyYWl0JTIwcGhvdG9ncmFwaHl8ZW58MHx8fHwxNzgzNzY3Njg1fDA&ixlib=rb-4.1.0&q=85",
+      "description": "User profile 3"
+    },
+    "avatar_4": {
+      "url": "https://images.unsplash.com/flagged/photo-1595514191830-3e96a518989b?crop=entropy&cs=srgb&fm=jpg&ixid=M3w4NjAzNTl8MHwxfHNlYXJjaHwzfHx1c2VyJTIwcHJvZmlsZSUyMHBvcnRyYWl0JTIwcGhvdG9ncmFwaHl8ZW58MHx8fHwxNzgzNzY3Njg1fDA&ixlib=rb-4.1.0&q=85",
+      "description": "User profile 4"
+    }
+  },
+  "instructions_to_main_agent": [
+    "Build a full-screen React app that simulates a desktop environment. Ensure `overflow-hidden` on the main container.",
+    "Implement the Taskbar and Start Menu. Add an authentic glossy Frutiger Aero look using CSS linear gradients.",
+    "Implement draggable windows using `framer-motion`'s `<motion.div drag />`.",
+    "For MoodDeck: Design a CDJ-inspired hardware interface. Dark mode, matte plastic panels, glowing orange UI elements. Build a large circular platter that spins when playing.",
+    "For MoodDeck Companion: Implement a simple CSS/SVG character with a speech bubble. Add keyframe animations for idle breathing and head-bobbing.",
+    "For RetroMSG: Implement a layout combining MSN Messenger sidebars with Instagram stories row on top of the chat area. Use a light blue/gray color scheme.",
+    "Ensure the wallpaper fills the background entirely via `object-cover` or `background-size: cover`.",
+    "Add 'data-testid' to all interactive elements for robust automated testing."
+  ],
+  "UNIVERSAL_GUIDELINES_FOR_MAIN_AGENT": [
+    "Avoid flat, generic designs. This is a nostalgic Y2K/Frutiger Aero aesthetic combined with skeuomorphic hardware (MoodDeck).",
+    "Utilize rich CSS gradients, box-shadows, and inset shadows to create depth, gloss, and 3D effects. Do not use plain flat colors for OS shell elements.",
+    "Do not center-align the main App container globally.",
+    "Every interaction (buttons, inputs, tabs) must have a distinct hover/active state.",
+    "Never use AI assistant emoji characters like 🤖🧠💭💡 for icons. Use lucide-react or standard SVG paths.",
+    "Do not use complete transparent background in headers or overlays that sit on top of content.",
+    "Ensure text contrast ratios are accessible."
+  ]
+}
